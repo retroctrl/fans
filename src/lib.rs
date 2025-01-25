@@ -20,5 +20,24 @@ pub enum FanControl {
 }
 
 /// Generic mechanism to select a fan.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct FanSelect(pub u8);
+
+/// Type alias for a fan duty cycle.
+pub type FanDutyCycle = u8;
+
+/// Type alias for a fan RPM.
+pub type FanRpm = u16;
+
+/// A simple report for a fan containing the duty cycle and RPM.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct FanReport {
+    /// Selected fan that this report belongs to.
+    pub select: FanSelect,
+
+    /// Reported Duty Cycle
+    pub duty_cycle: FanDutyCycle,
+
+    /// Reported RPM
+    pub rpm: FanRpm,
+}
