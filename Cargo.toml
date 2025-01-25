@@ -1,0 +1,8 @@
+[package]
+name = "fans"
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/retroctrl/fans/"
+keywords = ["embedded", "fan", "fans"]
+
+[dependencies]
