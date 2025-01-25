@@ -7,4 +7,10 @@ description = "Simple structures common to controlling fans"
 keywords = ["embedded", "fan", "fans"]
 license = "MPL-2.0"
 
+[features]
+default = []
+postcard = ["dep:postcard-schema", "dep:serde"]
+
 [dependencies]
+postcard-schema = { version = "0.2", features = ["derive"], optional = true }
+serde = { version = "1.0.203", default-features = false, features = ["derive"], optional = true }
