@@ -3,6 +3,7 @@ name = "fans"
 version = "0.1.0"
 edition = "2021"
 repository = "https://github.com/retroctrl/fans/"
+description = "Simple structures common to controlling fans"
 keywords = ["embedded", "fan", "fans"]
 
 [dependencies]
