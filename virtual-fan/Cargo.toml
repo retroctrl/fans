@@ -1,0 +1,18 @@
+[package]
+name = "virtual-fan"
+description = "Virtual fan driver for simulation and testing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+keywords = ["embedded", "fan", "fans", "virtual-fan"]
+
+[features]
+default = ["log"]
+std = []
+alloc = []
+log = ["dep:log"]
+
+[dependencies]
+fans = { version = "0.1" }
+log = { version = "0.4", optional = true }
+thiserror = { version = "2", default-features = false }
