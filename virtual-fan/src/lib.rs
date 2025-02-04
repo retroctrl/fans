@@ -20,6 +20,7 @@ const DEFAULT_RPM: u16 = 500;
 const DEFAULT_RPM_MAXIMUM: u16 = 2_000;
 
 #[derive(Clone, Copy, Debug, Error)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Error {
     #[error("Duty cycle out of range")]
     DutyCycleOutOfRange,
