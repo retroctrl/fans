@@ -7,7 +7,7 @@ extern crate std;
 #[cfg(any(test, feature = "alloc"))]
 extern crate alloc;
 
-use fans::{FanControl, FanSelect};
+use fans::{FanControl, FanDutyCycle, FanRpm, FanSelect};
 use thiserror::Error;
 
 /// Duty cycle which virtual fans are set to by default.
@@ -34,8 +34,8 @@ pub enum Error {
 
 #[derive(Clone, Copy, Debug)]
 struct VirtualFan {
-    duty_cycle: u8,
-    rpm: u16,
+    duty_cycle: FanDutyCycle,
+    rpm: FanRpm,
     mode: FanControl,
 }
 
@@ -55,7 +55,7 @@ pub struct VirtualFanDriver<const N: usize> {
     fan_list: [VirtualFan; N],
 
     /// Maximum RPM value that a virtual fan can reach
-    rpm_maximum: u16,
+    rpm_maximum: FanRpm,
 }
 
 impl<const N: usize> Default for VirtualFanDriver<N> {
@@ -80,12 +80,12 @@ impl<const N: usize> VirtualFanDriver<N> {
         }
     }
 
-    pub fn duty_cycle(&mut self, select: FanSelect) -> Result<u8, Error> {
+    pub fn duty_cycle(&mut self, select: FanSelect) -> Result<FanDutyCycle, Error> {
         self.valid_fan(select)?;
         Ok(self.fan_list[select.0 as usize - 1].duty_cycle)
     }
 
-    fn set_duty_cycle(&mut self, select: FanSelect, duty_cycle: u8) -> Result<(), Error> {
+    fn set_duty_cycle(&mut self, select: FanSelect, duty_cycle: FanDutyCycle) -> Result<(), Error> {
         self.valid_fan(select)?;
 
         if duty_cycle > 100 {
@@ -96,12 +96,12 @@ impl<const N: usize> VirtualFanDriver<N> {
         Ok(())
     }
 
-    pub fn rpm(&mut self, select: FanSelect) -> Result<u16, Error> {
+    pub fn rpm(&mut self, select: FanSelect) -> Result<FanRpm, Error> {
         self.valid_fan(select)?;
         Ok(self.fan_list[select.0 as usize - 1].rpm)
     }
 
-    fn set_rpm(&mut self, select: FanSelect, rpm: u16) -> Result<(), Error> {
+    fn set_rpm(&mut self, select: FanSelect, rpm: FanRpm) -> Result<(), Error> {
         self.valid_fan(select)?;
 
         if rpm > self.rpm_maximum {
@@ -112,7 +112,7 @@ impl<const N: usize> VirtualFanDriver<N> {
         Ok(())
     }
 
-    pub fn report(&mut self, select: FanSelect) -> Result<(u8, u16), Error> {
+    pub fn report(&mut self, select: FanSelect) -> Result<(FanDutyCycle, FanRpm), Error> {
         self.valid_fan(select)?;
         Ok((
             self.fan_list[select.0 as usize - 1].duty_cycle,
@@ -136,11 +136,11 @@ impl<const N: usize> VirtualFanDriver<N> {
         Ok(())
     }
 
-    pub fn maximum_rpm(&mut self) -> u16 {
+    pub fn maximum_rpm(&mut self) -> FanRpm {
         self.rpm_maximum
     }
 
-    pub fn set_maximum_rpm(&mut self, rpm: u16) {
+    pub fn set_maximum_rpm(&mut self, rpm: FanRpm) {
         self.rpm_maximum = rpm;
     }
 
