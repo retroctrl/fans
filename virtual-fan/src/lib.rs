@@ -68,8 +68,8 @@ impl<const N: usize> Default for VirtualFanDriver<N> {
 }
 
 impl<const N: usize> VirtualFanDriver<N> {
-    pub fn count(&self) -> u8 {
-        N as u8
+    pub fn count(&self) -> u16 {
+        N as u16
     }
 
     fn valid_fan(&self, select: FanSelect) -> Result<(), Error> {
