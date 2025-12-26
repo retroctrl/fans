@@ -39,6 +39,25 @@ pub type FanDutyCycle = u8;
 /// Type alias for a fan RPM.
 pub type FanRpm = u16;
 
+/// Connection type for a fan.
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
+#[cfg_attr(feature = "postcard", derive(Deserialize, Serialize, Schema))]
+pub enum FanConnection {
+    /// No physical connection detected.
+    #[default]
+    NotConnected,
+
+    /// 3-pin fan connection without PWM control.
+    ThreePin,
+
+    /// Standard Intel 4-pin fan connection with PWM control.
+    FourPin,
+
+    /// Virtual fan with no physical connection.
+    Virtual,
+}
+
 /// A simple report for a fan containing the duty cycle and RPM.
 #[derive(Clone, Copy, Debug, PartialEq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
