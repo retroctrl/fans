@@ -31,7 +31,7 @@ pub enum FanControl {
 #[derive(Clone, Copy, Debug, PartialEq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 #[cfg_attr(feature = "postcard", derive(Deserialize, Serialize, Schema))]
-pub struct FanSelect(pub u8);
+pub struct FanSelect(pub u16);
 
 /// Type alias for a fan duty cycle.
 pub type FanDutyCycle = u8;
