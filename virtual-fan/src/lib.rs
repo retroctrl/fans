@@ -73,7 +73,7 @@ impl<const N: usize> VirtualFanDriver<N> {
     }
 
     fn valid_fan(&self, select: FanSelect) -> Result<(), Error> {
-        if select.0 <= self.fan_list.len() as u8 && select.0 != 0 {
+        if select.0 <= self.fan_list.len() as u16 && select.0 != 0 {
             Ok(())
         } else {
             Err(Error::InvalidFan)
