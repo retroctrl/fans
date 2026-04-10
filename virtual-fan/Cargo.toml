@@ -1,7 +1,7 @@
 [package]
 name = "virtual-fan"
 description = "Virtual fan driver for simulation and testing"
-version.workspace = true
+version = "0.4.0"
 edition.workspace = true
 license.workspace = true
 keywords = ["embedded", "fan", "fans", "virtual-fan"]
