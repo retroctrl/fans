@@ -24,3 +24,31 @@ pub enum FanControl {
     /// Target RPM for a fan to reach.
     Rpm(u16),
 }
+
+impl core::fmt::Display for FanControl {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        match self {
+            Self::DutyCycle(d) => write!(f, "FanControl - Duty Cycle: {d}"),
+            Self::Rpm(r) => write!(f, "Fan Control - RPM: {r}"),
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use alloc::format;
+    use insta::assert_snapshot;
+
+    #[test]
+    fn display_duty_cycle() {
+        let control = FanControl::DutyCycle(42);
+        assert_snapshot!(format!("{control}"), @"FanControl - Duty Cycle: 42");
+    }
+
+    #[test]
+    fn display_rpm() {
+        let control = FanControl::Rpm(1800);
+        assert_snapshot!(format!("{control}"), @"Fan Control - RPM: 1800");
+    }
+}

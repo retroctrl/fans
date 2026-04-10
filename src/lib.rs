@@ -7,6 +7,12 @@
 
 #![no_std]
 
+#[cfg(any(test, feature = "std"))]
+extern crate std;
+
+#[cfg(any(test, feature = "alloc"))]
+extern crate alloc;
+
 mod connection;
 mod control;
 mod error;

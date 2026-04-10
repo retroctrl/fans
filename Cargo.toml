@@ -17,6 +17,8 @@ license.workspace = true
 
 [features]
 default = []
+std = []
+alloc = []
 defmt = ["dep:defmt"]
 postcard = ["dep:postcard-schema", "dep:serde"]
 
@@ -25,3 +27,6 @@ defmt = { version = "0.3", optional = true }
 postcard-schema = { version = "0.2", features = ["derive"], optional = true }
 serde = { version = "1.0.203", default-features = false, features = ["derive"], optional = true }
 thiserror = { version = "2.0.17", default-features = false }
+
+[dev-dependencies]
+insta = "1.43.2"
