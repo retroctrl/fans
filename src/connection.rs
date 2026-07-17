@@ -8,7 +8,7 @@
 #[cfg(feature = "postcard")]
 use postcard_schema::Schema;
 
-#[cfg(feature = "postcard")]
+#[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
 use crate::Error;
@@ -16,7 +16,8 @@ use crate::Error;
 /// Connection type for a fan.
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-#[cfg_attr(feature = "postcard", derive(Deserialize, Serialize, Schema))]
+#[cfg_attr(feature = "postcard", derive(Schema))]
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
 #[repr(u8)]
 pub enum FanConnection {
     /// No physical connection detected.

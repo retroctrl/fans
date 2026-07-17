@@ -8,7 +8,7 @@
 #[cfg(feature = "postcard")]
 use postcard_schema::Schema;
 
-#[cfg(feature = "postcard")]
+#[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
 /// Drive method for a fan.
@@ -16,7 +16,8 @@ use serde::{Deserialize, Serialize};
 /// A fan can be controlled by either setting the duty cycle or a target RPM.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-#[cfg_attr(feature = "postcard", derive(Deserialize, Serialize, Schema))]
+#[cfg_attr(feature = "postcard", derive(Schema))]
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
 pub enum FanControl {
     /// Duty cycle for a fan to be driven at.
     DutyCycle(u8),

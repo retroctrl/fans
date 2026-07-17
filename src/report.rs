@@ -8,7 +8,7 @@
 #[cfg(feature = "postcard")]
 use postcard_schema::Schema;
 
-#[cfg(feature = "postcard")]
+#[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -18,7 +18,8 @@ use crate::{
 /// A report containing the status of a fan.
 #[derive(Clone, Copy, Debug, PartialEq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-#[cfg_attr(feature = "postcard", derive(Deserialize, Serialize, Schema))]
+#[cfg_attr(feature = "postcard", derive(Schema))]
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
 pub struct FanReport {
     pub select: FanSelect,
     pub capabilities: u16,

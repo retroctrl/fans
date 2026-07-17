@@ -20,7 +20,8 @@ default = []
 std = []
 alloc = []
 defmt = ["dep:defmt"]
-postcard = ["dep:postcard-schema", "dep:serde"]
+postcard = ["dep:postcard-schema"]
+serde = ["dep:serde"]
 
 [dependencies]
 defmt = { version = "0.3", optional = true }

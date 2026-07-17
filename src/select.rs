@@ -8,13 +8,14 @@
 #[cfg(feature = "postcard")]
 use postcard_schema::Schema;
 
-#[cfg(feature = "postcard")]
+#[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
 /// Generic mechanism to select a fan.
 #[derive(Clone, Copy, Debug, PartialEq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
-#[cfg_attr(feature = "postcard", derive(Deserialize, Serialize, Schema))]
+#[cfg_attr(feature = "postcard", derive(Schema))]
+#[cfg_attr(feature = "serde", derive(Deserialize, Serialize))]
 pub struct FanSelect(pub u16);
 
 impl FanSelect {
